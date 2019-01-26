@@ -1,0 +1,95 @@
+syntax = "proto2";
+
+package core;
+
+message RecogBrand {
+	int32  brandId = 1 [default -1];
+	string label = 2;
+	int32  mainBrand = 3;
+	int32  subBrand = 4;
+	int32  model = 5;
+	string brandFullName = 6;
+}
+
+message Rect {
+	int32 x = 0;
+	int32 y = 1;
+	int32 w = 2;
+	int32 h = 3;
+}
+
+message InnerDetail  {
+	int32 classId = 0;
+	float prob = 1;
+	Rect rect = 2 ;
+	string name = 3;
+}
+
+
+
+message RecogResult {
+	Rect vehicleBox = 0;
+	RecogBrand recogBrand = 1;
+	Rect plateBox  = 2;
+	int colorId = 3 [default -1] ;
+	string colorName = 4;
+	int typeId = 5 [ default -1] ;
+	string typeName = 6;
+
+	string plateNo = 7;
+	int plateColor = 8 [ default -1 ];
+	string plateColorName = 9 [ default "unknown" ];
+	int DMD = 10 [ default -1 ] ;
+	int plateFlag = 11 [ default -1] ;
+	int mainDriverFlag = 12 [ default -1] ;
+	int secondDriverFlag = 13 [ default -1];
+	int mainDriverBeltFlag = 14 [ default -1];  // 0 未系, 1 已系, 默认 -1
+	int secondDriverBeltFlag = 15 [ default -1];
+	int mainDriverPhoneFlag = 16 [ default 0 ];  // 0 未打电话, 1 打电话, 默认 0
+	int secondDriverPhoneFlag = 17 [ default 0];
+	int mainSunVisorFlag = 18 [ default 0];    //  主遮阳板是否打开, 0 未打开，1 打开, 默认 0
+	int secondSunVisorFlag = 19 [ default 0 ]; // 主遮阳板是否打开, 0 未打开，1 打开, 默认 0
+	repeated  InnerDetail faceDetails;
+}
+
+message RecogRequest  {}
+
+message RecogResponse  {}
+
+enum ContentType {
+	FILE = 0;
+	URL = 1; 
+	MAT = 2;
+	SERIAL_OBJ = 3;
+};
+
+enum RecogStatus {
+	RECOG_FINISHED=0 ;
+	FOUND_PLATE = 1 ;
+	NOT_FOUND_PLATE = 100;
+	EMTPY_IMAGE = 101;
+	NOT_RECOG = 102;
+};
+
+
+enum SubmitStatus {
+	SUBMIT_SUCCESS = 0 ;
+	SUBMIT_URL_NOT_EXISTS = 1;
+	SUBMIT_URL_INVLID = 2 ;
+	SUBMIT_FILE_NOT_EXISTS = 3 ;
+	SUBMIT_FILE_INVALLID = 4 ;
+};
+
+
+struct RecogStat {
+	//public:
+	int64  totalReq = 1 [ default 0 ];
+	int64 completedReq = 2  [ default 0 ];
+	int64 invalidReq = 3  [ default 0 ];
+	int64 remainReq = 4  [ default 0 ];
+	int64 recogNum = 5  [ default 0 ];
+	int64 popNum = 6  [ default 0 ];
+	int64 singleResponses = 7  [ default 0 ]; 
+	 
+};
+

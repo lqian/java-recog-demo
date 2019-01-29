@@ -3,17 +3,18 @@
  */
 package com.xinhuan.examples.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,9 @@ public class CustomerStorageService {
 	@Value("${cmc.resource}")
 	String cmcResource;	 
 	
-	Set<String> evolutionKeys = new HashSet<String>();
+	Map<String, Long> evolutionKeyMap = new HashMap<String, Long>();
+	
+	long period = 5 * 3600 * 24 * 1000;
 
 	public CustomerStorageService() {
 		super();
@@ -52,20 +55,32 @@ public class CustomerStorageService {
 	
 
 	boolean find(String name) {
-		return evolutionKeys.contains(name);
+		Long start =  evolutionKeyMap.get(name);
+		return start == null ? false : System.currentTimeMillis() - start < period;
 	}
 	
 	
 	void read() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			BufferedReader reader = Files.newBufferedReader(Paths.get(cmcResource));
-			evolutionKeys.clear();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				evolutionKeys.add(line);
+			InputStream stream = Files.newInputStream(Paths.get(cmcResource));
+			Properties props = new Properties();
+			props.load(stream);
+			evolutionKeyMap.clear();
+			for (Entry<Object, Object> e: props.entrySet()) {
+				String key = (String) e.getKey();
+				String value = (String) e.getValue();
+				Date start = sdf.parse(value);
+				Long remain = System.currentTimeMillis() - start.getTime();
+				if (remain < period) {
+					evolutionKeyMap.put(key, start.getTime());
+				}
+				else {
+					System.out.println("out of day evolutioin keys: " + key + " at " + value);
+				}
 			}
-			reader.close();
-		} catch (IOException e) {
+			stream.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

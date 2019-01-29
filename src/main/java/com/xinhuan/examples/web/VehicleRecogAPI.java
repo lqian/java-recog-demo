@@ -42,7 +42,7 @@ public class VehicleRecogAPI {
 	CustomerStorageService customerStorageService;
 	
 	static {
-		JRecogDemo.coreInitContext();
+//		JRecogDemo.coreInitContext();
 	}
 	
 	@RequestMapping( value = "/recog",  method = { RequestMethod.POST })
@@ -75,7 +75,7 @@ public class VehicleRecogAPI {
 		}
 	}
 	 
-	 @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
+//	 @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
 	public  void handleBadRequests(HttpServletResponse response) throws IOException {
 	     response.sendError(HttpStatus.BAD_REQUEST.value(), "please contact us first!");
 	 }

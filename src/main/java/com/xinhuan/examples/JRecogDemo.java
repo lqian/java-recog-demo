@@ -4,12 +4,10 @@
 package com.xinhuan.examples;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.text.StringEscapeUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,8 +26,6 @@ import com.sun.jna.ptr.PointerByReference;
 enum ContentType {
 	FILE, URL, MAT, SERIAL_OBJ
 }
-
-
 
 public class JRecogDemo {
 

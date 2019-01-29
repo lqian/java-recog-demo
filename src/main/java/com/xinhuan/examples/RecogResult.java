@@ -37,7 +37,9 @@ public class RecogResult {
 	int secondDriverPhoneFlag = 0; // 副驾驶员打电话检测标志 0 未打电话, 1 打电话, 默认 0
 	int mainSunVisorFlag = 0;      //  主遮阳板是否打开, 0 未打开，1 打开, 默认 0
 	int secondSunVisorFlag = 0;   // 主遮阳板是否打开, 0 未打开，1 打开, 默认 0
-	List<InnerDetail> faceDetails = new ArrayList<InnerDetail>();  // 年检标位置
+	
+	
+	List<InnerDetail> faceDetails = new ArrayList<InnerDetail>();  // 细分特征
 		
 	public Rect getVehicleBox() {
 		return vehicleBox;

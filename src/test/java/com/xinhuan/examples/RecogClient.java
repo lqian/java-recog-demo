@@ -3,6 +3,9 @@
  */
 package com.xinhuan.examples;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
@@ -22,11 +25,11 @@ public class RecogClient {
 		 transport.open();
 		 TProtocol protocol = new  TBinaryProtocol(transport);
 		 Recog.Client client = new Recog.Client(protocol);
-		String ret =  client.single("a big news");
-		 System.out.println("return: " + ret);
+		 Path p = Paths.get("tmp/000751706200_20180203120628294_1.jpg");
+		 System.out.println(p.toAbsolutePath());
+		 String ret =  client.single(p.toAbsolutePath().toString());
+		 System.out.println(ret);
 		 transport.close();
-		 
-		 
 	}
 
 }

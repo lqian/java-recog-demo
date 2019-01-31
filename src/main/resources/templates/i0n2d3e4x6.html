@@ -1,41 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" ></meta> 
 <title>昕桓车辆识别在线演示</title>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/ajaxfileupload.js"></script>
-<script type="text/javascript" src="conf/config.js"></script>
-<link rel="stylesheet" type="text/css" href="css/index.css" />
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="../conf/config.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/index.css" />
 </head>
 <body>
-
 <div class="container">
-	
 	<div class="header">
 		<span style="margin-left: 100px;" id="ip_div">
-			
 		</span>
-		<input type="button" value="识别" id="recog" style="margin-left: 400px;">
+		<input type="button" value="识别" id="recog" style="margin-left: 400px;"></input>
 		<div class="recogHeaderResult">识别结果：</div>
 	</div>
-	
 	<div class="fleft left-bar">
-		
 		<div id="headPicDiv">
 			<img id="headPic" />
 		</div>
 	</div>
-	
 	<div class="fright right-bar">
 		<div class="right-content">
 			<span id="init">未识别。</span>
 			<span id="noResult" style="display:none">无识别结果。</span>
 			<span id="haveResult" style="display:none">
-				<div id="t_header">
-				</div>
-				<div id="t_body">
-					<p></p>
+				<div id="t_header"></div>
+				<div id="t_body">	<p></p>
 					<p>
 						　车辆品牌：<input type="text" id="vehicleBrand" />
 					</p>
@@ -73,6 +65,6 @@
 	
 </div>
 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 </body>
 </html>

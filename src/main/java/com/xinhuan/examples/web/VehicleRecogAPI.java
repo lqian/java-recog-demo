@@ -32,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
+import com.xinhuan.examples.IRecog;
 import com.xinhuan.examples.JRecogDemo;
 import com.xinhuan.examples.RecogResult;
 
@@ -42,17 +43,11 @@ import com.xinhuan.examples.RecogResult;
 @Controller
 public class VehicleRecogAPI {
 	
-	//core是库的名称，且能在系统环境变量LD_LIBRARY_PATH或者JVM参数jna.library.path中能搜索到libcore.so文件
-	 static {
-	 	Native.register("core");
-	 } 
-	public static native void coreInitContext() ;
-	public static native int recogSingleJson(String res, int contentType, PointerByReference bufp);
-	
-	ObjectMapper mapper = new ObjectMapper();
-	
 	@Autowired
 	CustomerStorageService customerStorageService;
+	
+	@Autowired
+	RecogService recogService;
 	
 	@RequestMapping( value = "/recog",  method = { RequestMethod.POST })
 	@ResponseBody	
@@ -73,15 +68,7 @@ public class VehicleRecogAPI {
 			is.close();
 			out.flush();
 			out.close();			
-			
-			PointerByReference bufp = new PointerByReference();
-			int len = recogSingleJson(pi.toString(), 0, bufp);
-			if (len > 0) {
-				Pointer p = bufp.getValue();
-				buffer = p.getByteArray(0, len);					
-				String content = StringEscapeUtils.unescapeJava(new String(buffer, 0, len));				
-				return  Arrays.asList(mapper.readValue(content,  RecogResult[].class));
-			}
+			return recogService.single(pi.toAbsolutePath().toString());
 		} catch (Exception e) {
 			 System.err.println(e);
 		}
@@ -90,17 +77,11 @@ public class VehicleRecogAPI {
 	
 	@RequestMapping(value = "/cmc/{cmcKey}")
 	public String  cmc(@PathVariable(name = "cmcKey") String cmcKey, Model model) {
-		if (customerStorageService.find(cmcKey)) {
-			return  "test";
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+		return (customerStorageService.find(cmcKey)) ?"i0n2d3e4x6": "info";		
 	}
 	 
 	 @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
 	public  void handleBadRequests(HttpServletResponse response) throws IOException {
 	     response.sendError(HttpStatus.BAD_REQUEST.value(), "please contact us first!");
 	 }
-	 
 }

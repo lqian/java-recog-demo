@@ -1,0 +1,86 @@
+
+.fleft{
+	float: left;	
+}
+
+.fright{
+	float: right;
+}
+
+.left-bar{
+	width: 70%;
+	border: 0px solid red;
+}
+
+.right-bar{
+	width: 30%;
+	border: 0px solid red;
+	color: red;
+}
+
+#headPicDiv{
+	border: 1px solid #e8e5e5;	
+	width: 100%;
+	position: relative;
+}
+
+.header{
+	border-bottom:1px solid #c3bdbd;
+	line-height: 42px;
+	margin-bottom: 10px;
+	position: relative;
+}
+.recogHeaderResult{
+	width: 100px;
+	position: absolute;
+	top: 0px;
+	left: 70%;
+	color: red;
+}
+
+.right-content{
+	margin-left: 10px;
+	color: blue;
+}
+
+#t_header{
+	overflow: hidden;
+	border-right:0px solid #c3bdbd;
+	width: 446px;
+}
+
+#t_header > div{
+	float: left;
+	width: 79px;
+	line-height: 36px;
+	text-align: center;
+	cursor: pointer;
+	border-left:1px solid #c3bdbd;
+	border-top:1px solid #c3bdbd;
+	border-bottom:1px solid #c3bdbd;
+}
+
+#t_header > div.on{
+	color: red;
+	border-bottom:0px solid #c3bdbd;
+}
+
+#t_body{
+	overflow: hidden;
+	width: 430px;
+	padding-left: 15px;
+	border-left:1px solid #c3bdbd;
+	border-right:1px solid #c3bdbd;
+	border-bottom:1px solid #c3bdbd;
+	padding-top: 3px;
+	padding-bottom: 10px;
+}
+
+#t_body > p{
+	margin: 0px;
+	margin-bottom: 20px;
+}
+
+#t_body input{
+	width: 300px;
+}

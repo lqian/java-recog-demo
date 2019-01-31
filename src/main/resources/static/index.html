@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>昕桓车辆识别在线演示</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="conf/config.js"></script>
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+
+<div class="container">
+	
+	<div class="header">
+		<span style="margin-left: 100px;" id="ip_div">
+			
+		</span>
+		<input type="button" value="识别" id="recog" style="margin-left: 400px;">
+		<div class="recogHeaderResult">识别结果：</div>
+	</div>
+	
+	<div class="fleft left-bar">
+		
+		<div id="headPicDiv">
+			<img id="headPic" />
+		</div>
+	</div>
+	
+	<div class="fright right-bar">
+		<div class="right-content">
+			<span id="init">未识别。</span>
+			<span id="noResult" style="display:none">无识别结果。</span>
+			<span id="haveResult" style="display:none">
+				<div id="t_header">
+				</div>
+				<div id="t_body">
+					<p></p>
+					<p>
+						　车辆品牌：<input type="text" id="vehicleBrand" />
+					</p>
+					<p>
+						　车身颜色：<input type="text" id="vehicleColor" />
+					</p>
+					<p>
+						　　　车型：<input type="text" id="vehicleType" />
+					</p>
+					<p>
+						　号牌号码：<input type="text" id="vehiclePlate" />
+					</p>
+					<p>
+						　号牌颜色：<input type="text" id="plateColor" />
+					</p>
+					<p>
+						危化品标志：<input type="text" id="dangerVehicleFlag" />
+					</p>
+					<p>
+						　　驾驶员：<input type="text" id="vehicleVriver" />
+					</p>
+					<p>
+						　　安全带：<input type="text" id="lifeBelt" />
+					</p>
+					<p>
+						　　打手机：<input type="text" id="callPhone" />
+					</p>
+					<p>
+						　　遮阳板：<input type="text" id="sunVisor" />
+					</p>
+				</div>
+			</span>
+		</div>
+	</div>
+	
+</div>
+
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

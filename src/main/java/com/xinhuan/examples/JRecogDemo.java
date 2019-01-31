@@ -4,10 +4,12 @@
 package com.xinhuan.examples;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.text.StringEscapeUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +28,8 @@ import com.sun.jna.ptr.PointerByReference;
 enum ContentType {
 	FILE, URL, MAT, SERIAL_OBJ
 }
+
+
 
 public class JRecogDemo {
 
@@ -47,11 +51,16 @@ public class JRecogDemo {
 		coreInitContext();  // only invoke one time
 		
 		PointerByReference bufp = new PointerByReference();
-		int len = recogSingleJson("test.jpg", 0, bufp);
+		int len= 0;
+		Long start = System.currentTimeMillis();
+		for (int i=0 ; i<10; i++) {
+			len = recogSingleJson("1.jpg", 0, bufp);
+		}
+		System.out.println("average recognize cost: " + ( System.currentTimeMillis() - start) / 10 + " ms");
 		if (len > 0) {
 			Pointer p = bufp.getValue();
 			byte[] buffer = p.getByteArray(0, len);			
-			String content = StringEscapeUtils.unescapeJava(new String(buffer, 0, len));	
+			String content = StringEscapeUtils.unescapeJava(new String(buffer, 0, len));
 			System.out.println(content);
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS, false);

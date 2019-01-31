@@ -24,21 +24,17 @@ import org.springframework.stereotype.Component;
  *
  */
  
-@Configuration
-@Component
-@PropertySource("classpath:/demo.properties")
 public class CustomerStorageService {
 	
-	@Value("${cmc.resource}")
 	String cmcResource;	 
 	
 	Map<String, Long> evolutionKeyMap = new HashMap<String, Long>();
 	
 	long period = 5 * 3600 * 24 * 1000;
 
-	public CustomerStorageService() {
+	public CustomerStorageService(String cmcResource  ) {
 		super();
-		 
+		this.cmcResource = cmcResource; 
 		new Thread() {
 			public void run() {
 				while (true) {
@@ -63,6 +59,7 @@ public class CustomerStorageService {
 	void read() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
+			if (cmcResource == null) return ;
 			InputStream stream = Files.newInputStream(Paths.get(cmcResource));
 			Properties props = new Properties();
 			props.load(stream);

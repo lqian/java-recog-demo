@@ -35,7 +35,7 @@ public class JRecogDemo {
 
 	//core是库的名称，且能在系统环境变量LD_LIBRARY_PATH或者JVM参数jna.library.path中能搜索到libcore.so文件
 	static {
-	//	Native.register("core");
+		Native.register("core");
 	}
 
 	public static native void coreInitContext() ;
@@ -53,8 +53,9 @@ public class JRecogDemo {
 		PointerByReference bufp = new PointerByReference();
 		int len= 0;
 		Long start = System.currentTimeMillis();
-		for (int i=0 ; i<10; i++) {
-			len = recogSingleJson("1.jpg", 0, bufp);
+		String fileName = args.length > 0 ? args[0] : "1.jpg";
+		for (int i=0 ; i<10; i++) {			
+			len = recogSingleJson(fileName, 0, bufp);
 		}
 		System.out.println("average recognize cost: " + ( System.currentTimeMillis() - start) / 10 + " ms");
 		if (len > 0) {

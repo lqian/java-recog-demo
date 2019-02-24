@@ -1,0 +1,17 @@
+[Unit]
+Description=Vehicle Image Content Base Search Engine
+After=network.target
+
+[Service]
+Type=forking
+
+## modify for real user to run the service
+User=link
+ExecStart=/app/java.recog-demo-1.0.0-SNAPSHOT/bin/recog-bootstrap.sh start
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target

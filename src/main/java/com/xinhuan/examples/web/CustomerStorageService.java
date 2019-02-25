@@ -72,9 +72,9 @@ public class CustomerStorageService {
 				if (remain < period) {
 					evolutionKeyMap.put(key, start.getTime());
 				}
-				else {
-					System.out.println("out of day evolutioin keys: " + key + " at " + value);
-				}
+				//else {
+				// 	System.out.println("out of day evolutioin keys: " + key + " at " + value);
+				//}
 			}
 			stream.close();
 		} catch (Exception e) {

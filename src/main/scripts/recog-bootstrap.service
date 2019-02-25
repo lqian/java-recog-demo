@@ -1,13 +1,14 @@
 [Unit]
-Description=Vehicle Plate API Service
+Description=Vehicle Recognize Web Engine
 After=network.target
+Requires=recog-server
 
 [Service]
 Type=forking
 
 ## modify for real user to run the service
 User=link
-ExecStart=/app/java.recog-demo-1.0.0-SNAPSHOT/bin/recog-bootstrap.sh start
+ExecStart=/app/java-recog-demo-1.0.0-SNAPSHOT/bin/recog-bootstrap.sh start
 StandardOutput=syslog
 StandardError=syslog
 Restart=on-abort

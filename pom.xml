@@ -10,10 +10,11 @@
 	</parent>
 
 	<groupId>com.xinhuan.examples</groupId>
-	<artifactId>java.recog-demo</artifactId>
+	<artifactId>java-recog-demo</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
 
+ 
 	<dependencies>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
@@ -54,22 +55,50 @@
 			<artifactId>libthrift</artifactId>
 			<version>0.12.0</version>
 		</dependency>
+ 
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
 	</dependencies>
 
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>utf-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+				<encoding>utf-8</encoding>
+			</configuration>
+		</plugin>
+
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<configuration>
+				<descriptors>
+					<descriptor>assembly.xml</descriptor>
+				</descriptors>
+			</configuration>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>single</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
 
 
 	<profiles>

@@ -1,1 +1,5 @@
 /target/
+/gen-java/
+/tmp/
+/test.jpg
+/test.json

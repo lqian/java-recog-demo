@@ -9,8 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
-import com.xinhuan.examples.JRecogDemo;
  
  
 
@@ -26,6 +24,16 @@ public class AppBoot {
 	@Value("${cmc.resource}")
 	String cmcResource;	 
 	
+	@Value("${thrift.port:9090}")
+	int port;
+	
+	@Value("${thrift.host:localhost}")
+	String host;
+	
+	@Bean
+	public RecogService recogService() throws Exception {
+		return new RecogService(host, port);
+	}
 	
 	@Bean 
 	public CustomerStorageService createCustomerStorageService() {
@@ -45,7 +53,6 @@ public class AppBoot {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JRecogDemo.coreInitContext();
 		SpringApplication.run(AppBoot.class, args);
 	}
 }

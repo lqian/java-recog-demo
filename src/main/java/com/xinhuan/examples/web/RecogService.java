@@ -29,7 +29,7 @@ public class RecogService {
 	ObjectMapper mapper = new ObjectMapper();
 
 	public RecogService(String host, int port) throws Exception {
-		transport =  new TSocket(host, port);
+		transport =  new TSocket(host, port, 300000);
 		transport.open();
 		protocol = new  TBinaryProtocol(transport);
 		client = new Recog.Client(protocol);

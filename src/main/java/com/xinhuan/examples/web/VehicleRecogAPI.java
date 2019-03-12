@@ -47,7 +47,8 @@ public class VehicleRecogAPI {
 	@CrossOrigin
 	public List<RecogResult> recog(@RequestParam("img") MultipartFile img) {
 		try {
-			Path tmp = Paths.get("tmp");
+			String lib = System.getProperty("java.ext.dirs", null);			
+			Path tmp = lib == null ?  Paths.get("tmp") : Paths.get(lib).resolve("../tmp");
 			if (Files.notExists(tmp)) Files.createDirectories(tmp);
 			byte[] buffer = new byte[8192];
 			InputStream is = img.getInputStream();	

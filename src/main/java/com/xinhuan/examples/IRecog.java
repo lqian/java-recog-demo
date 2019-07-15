@@ -13,7 +13,7 @@ import com.sun.jna.ptr.PointerByReference;
  */
 public interface IRecog  extends Library {
 	
-	IRecog INSTANCE = Native.load("core", IRecog.class);
+	IRecog INSTANCE = Native.load("mlpdr", IRecog.class);
 	
 	public void coreInitContext() ;
 	public int recogSingleJson(String res, int contentType, PointerByReference bufp);

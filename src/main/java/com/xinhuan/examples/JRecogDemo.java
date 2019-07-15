@@ -35,7 +35,7 @@ public class JRecogDemo {
 
 	//core是库的名称，且能在系统环境变量LD_LIBRARY_PATH或者JVM参数jna.library.path中能搜索到libcore.so文件
 	static {
-		Native.register("core");
+		Native.register("mlpdr");
 	}
 
 	public static native void coreInitContext() ;

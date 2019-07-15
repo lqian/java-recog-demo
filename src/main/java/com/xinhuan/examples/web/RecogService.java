@@ -40,6 +40,7 @@ public class RecogService {
 			String ret =  client.single(fullname);
 			return Arrays.asList(mapper.readValue(ret, RecogResult[].class));
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return Arrays.asList();
 	}	 

@@ -37,6 +37,7 @@ public class RegcogServer {
 			TServerTransport serverTransport = new TServerSocket(9090);
 			TServer server = new TSimpleServer(new Args(serverTransport).processor(processor));
 			server.serve();
+			System.out.println("started!!!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,16 +47,19 @@ public class RegcogServer {
 
 		@Override
 		public String single(String res) throws TException {
+			System.out.println(res);
 			PointerByReference bufp = new PointerByReference();
 			int len= 0;
 			len = IRecog.INSTANCE.recogSingleJson(res, 0, bufp);
 			if (len > 0) {
 				Pointer p = bufp.getValue();
 				byte[] buffer = p.getByteArray(0, len);			
-				String content = StringEscapeUtils.unescapeJava(new String(buffer, 0, len));
-				return content;
+				String content = new String(buffer, 0, len);
+				return String.format("[{\"plateNo\": \"%s\"}]", content);
 			}
-			return "[]";
+			else {
+				return "[]";
+			}
 		}
 	}
 }
